@@ -1,4 +1,3 @@
-# TP2-GestorEmails
 Alumno: Stefano Merino De Rui
 
 Materia: 

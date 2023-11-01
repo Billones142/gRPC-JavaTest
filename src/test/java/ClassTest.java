@@ -2,12 +2,12 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import proyect.blueprint.JavaClass;
+import grpc.test.ServicioGRPC;
 
 public class ClassTest {
     @Test
     public void ClassTest(){// TODO
-        JavaClass test= new JavaClass();
+        ServicioGRPC test= new ServicioGRPC();
         assertNotEquals(null, test);
     }
 }
