@@ -1,12 +1,21 @@
 package com.faxterol.grpcdemo.services;
 
-import org.longnet.springboot.grpc.GRpcService;
+import com.faxterol.grpcdemo.interfaces.ChatServiceGrpc.ChatServiceImplBase;
 
-//Servicio gRPC
+import java.util.Random;
+
+import org.lognet.springboot.grpc.GRpcService;
+
+import com.faxterol.grpcdemo.MultiplesMensajesStream;
+import com.faxterol.grpcdemo.MultiplesRespuestasStream;
+import com.faxterol.grpcdemo.interfaces.EnviarMensaje;
+import com.faxterol.grpcdemo.interfaces.RecibirMensaje;
+
+import io.grpc.stub.StreamObserver;
+
 @GRpcService
-public class ChatService extends ChatServiceImplBase{ //ChatServiceImplBase fue creado en el proyecto de la interfaz
+public class ChatService extends ChatServiceImplBase{
 
-    //Metodo unario
     @Override
     public void enviarMensaje(EnviarMensaje request, StreamObserver<RecibirMensaje> responseObserver) {
         //Crea la respuesta
@@ -22,23 +31,20 @@ public class ChatService extends ChatServiceImplBase{ //ChatServiceImplBase fue 
         responseObserver.onCompleted();
     }
 
-    //Stream unidireccional de cliente a servidor
     @Override
     public StreamObserver<EnviarMensaje> enviarMultiplesMensajes(StreamObserver<RecibirMensaje> responseObserver) {
         return new MultiplesMensajesStream(responseObserver);
         /*
-         * Una solución alternativa es crear una clase anomina, esto es hacer el new StreamObserver e implementar los métodos necesarios.
+         * Una solución alternativa es crear una clase anomina, esto es hacer el new StreamObserver e implementar los métodos necesarios. 
          */
-        //return new StreamObserver<EnviarMensaje>(){}
+        //return new StreamObserver<EnviarMensaje>(){} 
     }
 
-    //Stream bidireccional
     @Override
     public StreamObserver<EnviarMensaje> enviarRecibirMultiplesMensajes(StreamObserver<RecibirMensaje> responseObserver) {
         return new MultiplesRespuestasStream(responseObserver);
     }
 
-    //Stream unidireccional servidor-cliente
     @Override
     public void recibirMultiplesRespuestas(EnviarMensaje request, StreamObserver<RecibirMensaje> responseObserver) {
         Random random = new Random();
@@ -53,4 +59,5 @@ public class ChatService extends ChatServiceImplBase{ //ChatServiceImplBase fue 
 
         responseObserver.onCompleted();
     }
+    
 }

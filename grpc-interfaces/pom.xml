@@ -15,6 +15,7 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
+  
 
   <dependencies>
     <dependency>
@@ -41,6 +42,7 @@
     </dependency>
   </dependencies>
 
+
   <build>
     <extensions>
         <extension>
@@ -56,7 +58,7 @@
             <artifactId>protobuf-maven-plugin</artifactId>
             <version>${protobuf-plugin.version}</version>
             <configuration>
-              <protocArtifact>com.google.protobuf:protoc:${protobuf.version}:exe:${os.detected.classifier}</protocArtifact>
+                <protocArtifact>com.google.protobuf:protoc:${protobuf.version}:exe:${os.detected.classifier}</protocArtifact>
                 <pluginId>grpc-java</pluginId>
                 <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}</pluginArtifact>
             </configuration>
@@ -70,5 +72,6 @@
             </executions>
         </plugin>
     </plugins>
-</build>
+  </build>
+
 </project>
